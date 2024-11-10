@@ -1,0 +1,47 @@
+﻿{% extends "index.html" %}
+
+{% block contenido_interno %}
+<div class="contenido">
+    <h1>{{ pelicula['Titulo'] }}</h1>
+    <div class="contenido-pelicula">
+        <div class="datos-pelicula">
+            <p><strong>Sinopsis:</strong> {{ pelicula.Sinopsis }}</p>
+            <br/>
+            <div class="tabla">
+                <div class="fila">
+                    <div class="celda-titulo">Director:</div>
+                    <div class="celda">{{ pelicula.Director }}</div>
+                </div>
+                <div class="fila">
+                    <div class="celda-titulo">Reparto:</div>
+                    <div class="celda">{{ pelicula.get('Reparto') }}</div>
+                </div>
+                <div class="fila">
+                    <div class="celda-titulo">Estreno:</div>
+                    <div class="celda">{{ pelicula.get('FechaEstrenoss') }}</div>
+                </div>
+                <div class="fila">
+                    <div class="celda-titulo">Géneros:</div>
+                    <div class="celda">{{ pelicula.get('Geneross') }}</div>
+                </div>
+                <div class="fila">
+                    <div class="celda-titulo">Duración:</div>
+                    <div class="celda">{{ pelicula.get('Duracion') }} minutos</div>
+                </div>
+            </div>
+        </div>
+        <!-- Imagen de la película -->
+        <div class="imagen-pelicula">
+            <img src="{{ url_for('static', filename='img/pelicula/' + pelicula.get('id', 'default') + '.jpg') }}" alt="{{ pelicula['Titulo'] }}">
+        </div>
+    </div>
+
+    <div class="pelicula-video">
+        {% if pelicula.get('Trailer') %}
+            <h3>Trailer:</h3>
+            
+            <iframe width="580" height="400" src="https://www.youtube.com/embed/{{ pelicula.get('Trailer') }}" frameborder="0" allowfullscreen></iframe>
+        {% endif %}
+    </div>
+</div>
+{% endblock contenido_interno %}
